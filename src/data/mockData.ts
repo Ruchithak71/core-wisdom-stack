@@ -208,14 +208,14 @@ export const comments: Comment[] = [
   },
   {
     id: '4',
-    content: 'The deployment pipeline configuration isn't working as described. I'm getting an error at the validation step.',
+    content: "The deployment pipeline configuration isn't working as described. I'm getting an error at the validation step.",
     author: users[3],
     createdAt: '2023-03-16T09:20:00Z',
     documentId: '7'
   },
   {
     id: '5',
-    content: 'This has been incredibly helpful for our team's onboarding process. Thank you!',
+    content: "This has been incredibly helpful for our team's onboarding process. Thank you!",
     author: users[0],
     createdAt: '2023-03-01T15:50:00Z',
     documentId: '8'
