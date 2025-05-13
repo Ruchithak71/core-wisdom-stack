@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Browse from "./pages/Browse";
@@ -30,6 +30,7 @@ const App = () => (
             <Route path="/category/:id" element={<CategoryView />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/my-files" element={<MyFiles />} />
+            <Route path="/my-documents" element={<Navigate replace to="/my-files" />} />
             <Route path="/analytics" element={<Analytics />} />
             {/* Additional routes would go here */}
           </Route>

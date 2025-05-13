@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { 
   FileText, 
@@ -33,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage }) => {
   const mainNavItems = [
     { name: 'Dashboard', icon: <Home className="h-5 w-5" />, path: '/' },
     { name: 'Browse', icon: <Compass className="h-5 w-5" />, path: '/browse' },
-    { name: 'My Documents', icon: <FileText className="h-5 w-5" />, path: '/my-documents' },
+    { name: 'My Files', icon: <FileText className="h-5 w-5" />, path: '/my-files' },
     { name: 'Create New', icon: <FolderPlus className="h-5 w-5" />, path: '/create' },
   ];
 
