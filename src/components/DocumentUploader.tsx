@@ -14,12 +14,14 @@ import {
 import { Upload, FileType } from 'lucide-react';
 import { categories, tags } from '@/data/mockData';
 import { toast } from 'sonner';
+import { storeFile } from '@/utils/fileStorage';
 
 interface DocumentUploaderProps {
   onUpload?: (data: FormData) => void;
+  onSuccess?: () => void;
 }
 
-const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload }) => {
+const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload, onSuccess }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
@@ -32,7 +34,7 @@ const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!title) {
@@ -45,12 +47,21 @@ const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload }) => {
       return;
     }
 
-    // Simulate upload
+    if (!selectedFile) {
+      toast.error('Please select a file to upload');
+      return;
+    }
+
+    // Start upload
     setIsUploading(true);
     
-    setTimeout(() => {
+    try {
+      // Store the file
+      await storeFile(selectedFile, title, content, category);
+      
       toast.success('Document uploaded successfully!');
-      setIsUploading(false);
+      
+      // Reset the form
       setTitle('');
       setContent('');
       setCategory('');
@@ -59,7 +70,17 @@ const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload }) => {
       // Reset the file input
       const fileInput = document.getElementById('file-upload') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
-    }, 1500);
+      
+      // Notify parent component if callback provided
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (error) {
+      toast.error('Failed to upload document');
+      console.error('Upload error:', error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (

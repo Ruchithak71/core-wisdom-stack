@@ -11,6 +11,7 @@ import DocumentDetail from "./pages/DocumentDetail";
 import CategoryView from "./pages/CategoryView";
 import Upload from "./pages/Upload";
 import Analytics from "./pages/Analytics";
+import MyFiles from "./pages/MyFiles";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/document/:id" element={<DocumentDetail />} />
             <Route path="/category/:id" element={<CategoryView />} />
             <Route path="/upload" element={<Upload />} />
+            <Route path="/my-files" element={<MyFiles />} />
             <Route path="/analytics" element={<Analytics />} />
             {/* Additional routes would go here */}
           </Route>

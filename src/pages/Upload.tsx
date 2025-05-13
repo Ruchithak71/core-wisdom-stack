@@ -9,17 +9,31 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FileUp, Link as LinkIcon, Globe } from 'lucide-react';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const UploadPage = () => {
+  const navigate = useNavigate();
+  
   const handleUrlSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success('URL submitted for processing');
+  };
+
+  const handleUploadSuccess = () => {
+    // Give a bit of time for the toast message to show
+    setTimeout(() => {
+      // Navigate to the My Files page after successful upload
+      navigate('/my-files');
+    }, 1500);
   };
   
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold tracking-tight">Upload Knowledge</h1>
+        <Button variant="outline" onClick={() => navigate('/my-files')}>
+          View My Files
+        </Button>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -41,7 +55,7 @@ const UploadPage = () => {
             </TabsList>
             
             <TabsContent value="document">
-              <DocumentUploader />
+              <DocumentUploader onSuccess={handleUploadSuccess} />
             </TabsContent>
             
             <TabsContent value="url">
